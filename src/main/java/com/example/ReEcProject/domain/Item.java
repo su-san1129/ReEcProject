@@ -1,11 +1,15 @@
 package com.example.ReEcProject.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Table;
 
 import java.util.List;
 
 @Data
+@AllArgsConstructor
+@Table("ITEMS")
 public class Item {
     /** ID */
     @Id
@@ -20,8 +24,6 @@ public class Item {
     private Integer priceL;
     /** 画像パス */
     private String imagePath;
-    /** 削除フラグ */
-    private Boolean deleted;
     /** トッピングリスト */
     List<Topping> toppingList;
 }

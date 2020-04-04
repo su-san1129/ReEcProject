@@ -1,11 +1,13 @@
 package com.example.ReEcProject.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 
 import java.util.List;
 
 @Data
+@AllArgsConstructor
 public class OrderItem {
     /** 注文商品ID */
     @Id

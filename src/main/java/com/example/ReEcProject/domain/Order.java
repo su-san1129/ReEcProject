@@ -1,5 +1,6 @@
 package com.example.ReEcProject.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 
@@ -8,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 @Data
+@AllArgsConstructor
 public class Order {
 
     /** 注文ID */

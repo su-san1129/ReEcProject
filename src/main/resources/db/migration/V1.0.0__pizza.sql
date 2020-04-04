@@ -3,18 +3,18 @@ drop table if exists users cascade;
 
 create table users (
  id serial primary key
- , name varchar(100) not null
- , email varchar(100) not null unique
- , password text not null
- , zipcode varchar(7) not null
- , address varchar(200) not null
- , telephone varchar(15) not null
+ , name varchar not null
+ , email varchar not null unique
+ , password varchar not null
+ , zipcode varchar not null
+ , address varchar not null
+ , telephone varchar not null
  , isAdmin boolean default false not null
 ) ;
 
 
 --ユーザー登録(pass:morimori) ( admin password: admin  )
-insert into users(name, email, password, zipcode, address, telephone) values('テストユーザ', 'test@test.co.jp', 'a232fe3fd81a175aa15541dc2051fe2cb003cdae810371104fbfc100eb34cd6f','1111111', 'テスト住所', 'テスト電話番号');
+insert into users(name, email, password, zipcode, address, telephone, isadmin) values('テストユーザ', 'test@test.co.jp', 'a232fe3fd81a175aa15541dc2051fe2cb003cdae810371104fbfc100eb34cd6f','1111111', 'テスト住所', 'テスト電話番号', 'true');
 insert into users(name, email, password, zipcode, address, telephone, isadmin) values('管理者', 'admin@admin.com', '$2a$10$Yj/Vp9YW6r0RwsUWa4bvTecsu0jRLYMZgMziXFapsKggLF5vNJguO','1110000', '東京都', '08012345678', 'true');
 
 -- 商品
@@ -22,11 +22,11 @@ drop table if exists items cascade;
 
 create table items (
   id integer primary key
-  , name text not null
-  , description text not null
+  , name varchar not null
+  , description varchar not null
   , price_m integer not null
   , price_l integer not null
-  , image_path text not null
+  , image_path varchar not null
 ) ;
 
 insert into items values(1, 'じゃがバターベーコン', 'ホクホクのポテトと旨味が凝縮されたベーコンを特製マヨソースで味わって頂く商品です。バター風味豊かなキューブチーズが食材の味を一層引き立てます。', 1490, 2570, '1.jpg');
@@ -54,7 +54,7 @@ drop table if exists toppings cascade;
 
 create table toppings (
   id integer primary key
-  , name text not null
+  , name varchar not null
   , price_m integer not null
   , price_l integer not null
 ) ;
