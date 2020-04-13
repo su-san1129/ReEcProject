@@ -24,6 +24,5 @@ public class Item {
     private Integer priceL;
     /** 画像パス */
     private String imagePath;
-    /** トッピングリスト */
-    List<Topping> toppingList;
+
 }
