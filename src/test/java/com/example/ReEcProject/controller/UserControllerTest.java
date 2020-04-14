@@ -1,6 +1,8 @@
 package com.example.ReEcProject.controller;
 
+import com.example.ReEcProject.domain.User;
 import com.example.ReEcProject.repository.UserRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,8 +14,11 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.util.List;
+
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -32,8 +37,8 @@ class UserControllerTest {
     @Autowired
     private WebApplicationContext context;
 
-//    @Autowired
-//    private ObjectMapper mapper;
+    @Autowired
+    private ObjectMapper mapper;
 
     @BeforeEach
     void setUp() {
@@ -43,6 +48,7 @@ class UserControllerTest {
                 .build();
     }
 
+    /** 認証エラーになるはず */
     @Test
     void indexTestNoLoginUser() throws Throwable{
         mvc.perform(get("/"))
@@ -51,9 +57,10 @@ class UserControllerTest {
 
     @Test
     void indexTestWithLoginUser() throws Throwable{
-        final var users = userRepository.findAll().toString();
+        final var users = (List<User>) userRepository.findAll();
         mvc.perform(get("/").with(user("user")))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(content().json(mapper.writeValueAsString(users)));
     }
 
 }
