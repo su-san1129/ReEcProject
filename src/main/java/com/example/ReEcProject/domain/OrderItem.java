@@ -22,6 +22,4 @@ public class OrderItem {
     private Character size;
     /** アイテム */
     private Item item;
-    /** オーダートッピングリスト */
-    private List<OrderTopping> orderToppingList;
 }

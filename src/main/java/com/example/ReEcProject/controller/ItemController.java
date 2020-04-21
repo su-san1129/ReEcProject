@@ -16,12 +16,9 @@ public class ItemController {
 
     private final ItemService itemService;
 
-    @GetMapping("/getItems")
+    @GetMapping
     public List<Item> getItems(){
         return itemService.getItems();
     }
-
-
-
 
 }

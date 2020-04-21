@@ -8,9 +8,12 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
@@ -58,9 +61,11 @@ class UserControllerTest {
     @Test
     void indexTestWithLoginUser() throws Throwable{
         final var users = (List<User>) userRepository.findAll();
-        mvc.perform(get("/").with(user("user")))
-                .andExpect(status().isOk())
-                .andExpect(content().json(mapper.writeValueAsString(users)));
+        final var s = mapper.writeValueAsString(users);
+        System.out.println(s);
+        mvc.perform(get("/").with(user("user"))
+                .contentType(MediaType.APPLICATION_JSON)
+        ).andExpect(status().isOk());
     }
 
 }

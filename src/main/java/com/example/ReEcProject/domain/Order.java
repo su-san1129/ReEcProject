@@ -39,6 +39,4 @@ public class Order {
     private Integer paymentMethod;
     /** ユーザー */
     private User user;
-    /** 注文商品リスト */
-    private List<OrderItem> orderItemList;
 }
